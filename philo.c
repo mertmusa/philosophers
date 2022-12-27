@@ -6,11 +6,12 @@
 /*   By: mtemel <mtemel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 16:20:29 by mtemel            #+#    #+#             */
-/*   Updated: 2022/12/26 17:16:32 by mtemel           ###   ########.fr       */
+/*   Updated: 2022/12/27 12:15:12 by mtemel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
 
 /* warn when there is an error and write the description */
 void	ft_error(char *str)
@@ -21,8 +22,7 @@ void	ft_error(char *str)
 
 void	*routine()
 {
-	printf("Test from thread!\n");
-	return (0);
+
 }
 
 /* create threads
@@ -40,11 +40,18 @@ void	create_thread(t_philo *philo, t_thread *thread)
 		{
 			printf("Create error thread no:%d\n", i);
 			ft_error("Thread creation error!");
+			return ;
 		}
+		i++;
+	}
+	i = 0;
+	while (i < philo->philo_nof)
+	{
 		if (pthread_join(philo->mythread[i].thread_id, NULL) != 0)
 		{
 			printf("Join error thread no:%d\n", i);
 			ft_error("Thread join error!");
+			return ;
 		}
 		i++;
 	}
@@ -54,6 +61,7 @@ void	create_thread(t_philo *philo, t_thread *thread)
 void	start_to_thrive(t_philo *philo, t_thread *thread)
 {
 	create_thread(philo, thread);
+	return ;
 }
 
 /* check arguments if there is nothing wrong then take as parameters */
@@ -91,9 +99,15 @@ void	check_then_argtoparam(t_philo *philo, t_thread *thread, char **argv, int c)
 		printf("number_of_times_each_philosopher_must_eat: %d\n", philo->eat_noftep);
 	}
 	if (philo->philo_nof < 1)
+	{
 		ft_error("Number of philo can't be under 1!");
+		return ;
+	}
 	if (philo->sleep_tto < 0 || philo->eat_tto < 0 || philo->die_tto < 0 || philo->eat_noftep < 0)
+	{
 		ft_error("Times can not be negative!");
+		return ;
+	}
 }
 
 int	main(int argc, char **argv)
@@ -110,4 +124,5 @@ int	main(int argc, char **argv)
 	}
 	else
 		ft_error("Wrong Number Of Arguments!");
+	return (0);
 }
