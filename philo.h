@@ -32,12 +32,14 @@ typedef struct s_thread
 
 typedef struct s_philo
 {
-	int			philo_nof;
-	int			die_tto;
-	int			eat_tto;
-	int			sleep_tto;
-	int			eat_noftep;
-	t_thread	mythread[500];
+	int				philo_nof;
+	int				die_tto;
+	int				eat_tto;
+	int				sleep_tto;
+	int				eat_noftep;
+	t_thread		mythread[250];
+	pthread_mutex_t	forks[250];
+	int				deneme;
 }	t_philo;
 
 int	ft_atoi(const char *str);

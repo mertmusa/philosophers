@@ -10,14 +10,26 @@
 #                                                                              #
 # **************************************************************************** #
 
-all:
-	gcc -Wall -Wextra -Werror philo*.c -o philo
+NAME = philo
+CC = gcc
+FLAGS = -Wall -Wextra -Werror
+SRCS = philo*.c
+OBJ = $(SRCS:.c = .o)
+
+$(NAME): $(OBJ)
+	@$(CC) $(FLAGS) $(SRCS) -o $(NAME)
+	@echo "\033[1;92mCOMPILED SUCCESSFULLY...\033[0m"
+
+all: $(NAME)
 
 clean:
-	rm -f philo
+	@rm -f $(NAME)
 
 fclean: clean
 
-re: fclean all
+re:
+	@echo "\033[1;92mREMAKE...\033[0m"
+	@make fclean
+	@make all
 
 .PHONY: all clean fclean re bonus
