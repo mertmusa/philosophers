@@ -23,11 +23,12 @@ void	ft_error(char *str)
 
 int	philo_init(t_philo *philo)
 {
-	t_rules *rules;
+	t_rules	*rules;
 
 	rules = philo->mrules;
+	printf("this is the line %d ph: %d\n", __LINE__, rules->philo_nof);
 	int (i) = 0;
-	rules->philo[i].left_fork_id = rules->philo_nof - 1;
+	//rules->philo[i].left_fork_id = rules->philo_nof - 1;
 	while (i < rules->philo_nof)
 	{
 		rules->philo[i].philo_id = i;
@@ -35,6 +36,8 @@ int	philo_init(t_philo *philo)
 		if (i)
 			rules->philo[i].left_fork_id = i - 1;
 		rules->philo[i].mrules = rules;
+		printf("this is the line %d i: %d\n", __LINE__, i);
+		i++;
 	}
 	return (0);
 }
@@ -42,17 +45,36 @@ int	philo_init(t_philo *philo)
 void	*routine(void *void_philo)
 {
 	t_philo	*philo;
+	//t_rules	*rules;
 
-	int (i) = 0;
+	//rules = (t_rules *)void_rules;
 	philo = (t_philo *)void_philo;
-	philo_init(philo);
+	//philo->mrules = (t_rules *)malloc(sizeof(t_rules));
+	printf("this is the line %d\n", __LINE__);
+	printf("this is the line %d philo: %i\n", __LINE__, philo->mrules->philo_nof);
+	//philo_init(philo);
+	//printf("nof philo:%d\n", philo->mrules->philo_nof);
+	printf("this is the line %d\n", __LINE__);
+	return (NULL);
+}
+
+/*void	*routine(void *void_philo)
+{
+	t_philo	*philo;
+
+	//int (i) = 0;
+	philo = (t_philo *)void_philo;
+	printf("nof philo:%d\n", philo->mrules->philo_nof);
+	(void)philo;
+	//philo_init(philo);
 	while (i < philo->mrules->philo_nof)
 	{
 		if (i % 2)
 			usleep(10000);
 	}
+	printf("this is the line %d\n", __LINE__);
 	return (NULL);
-}
+}*/
 
 /* create threads and send them to table
 Note: pthread_create returns 0 on success
@@ -84,6 +106,16 @@ void	start_to_thrive(t_rules *rules, t_philo *philo)
 		}
 		i++;
 	}
+	/*while (i < rules->philo_nof)
+	{
+		if (pthread_create(&rules->philo[i].thread_id, NULL, &routine, (void *)(&rules->philo[i])) != 0)
+		{
+			printf("Create error thread no:%d\n", i);
+			ft_error("Thread creation error!");
+			return ;
+		}
+		i++;
+	}*/
 	i = 0;
 	while (i < rules->philo_nof)
 	{

@@ -18,15 +18,13 @@
 # include <stdlib.h>
 # include <pthread.h>
 
-struct	s_rules;
-
+typedef struct	s_rules t_rules;
 typedef struct s_philo
 {
 	int				philo_id;
 	int				left_fork_id;
 	int				right_fork_id;
 	pthread_t		thread_id;
-	pthread_t		fork_id;
 	struct s_rules	*mrules;
 }	t_philo;
 
