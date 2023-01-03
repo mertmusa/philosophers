@@ -36,6 +36,7 @@ int	philo_init(t_philo *philo)
 			rules->philo[i].left_fork_id = i - 1;
 		rules->philo[i].mrules = rules;
 	}
+	return (0);
 }
 
 void	*routine(void *void_philo)
