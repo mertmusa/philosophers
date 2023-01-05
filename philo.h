@@ -6,7 +6,7 @@
 /*   By: mtemel <mtemel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 16:24:22 by mtemel            #+#    #+#             */
-/*   Updated: 2022/12/27 12:51:46 by mtemel           ###   ########.fr       */
+/*   Updated: 2023/01/05 17:22:27 by mtemel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,16 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <pthread.h>
+# include <sys/time.h>
 
-typedef struct	s_rules t_rules;
+struct	s_rules;
 typedef struct s_philo
 {
 	int				philo_id;
 	int				left_fork_id;
 	int				right_fork_id;
+	int				eat_counter;
+	long long		last_eat;
 	pthread_t		thread_id;
 	struct s_rules	*mrules;
 }	t_philo;
@@ -36,8 +39,11 @@ typedef struct s_rules
 	int				sleep_tto;
 	int				eat_noftep;
 	int				is_dead;
-	t_philo			philo[250];
-	pthread_mutex_t	forks[250];
+	int				all_eat;
+	pthread_mutex_t	*forkex;
+	pthread_mutex_t	writex;
+	t_philo			*philo;
+	long long		start_time;
 }	t_rules;
 
 int	ft_atoi(const char *str);
