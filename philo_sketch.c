@@ -6,7 +6,7 @@
 /*   By: mtemel <mtemel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 16:20:29 by mtemel            #+#    #+#             */
-/*   Updated: 2023/01/05 20:38:29 by mtemel           ###   ########.fr       */
+/*   Updated: 2023/01/05 22:49:57 by mtemel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,6 +198,7 @@ int	start_to_thrive(t_rules *rules)
 	{
 		if (pthread_create(&rules->philo[i].thread_id, NULL, routine, &rules->philo[i]) != 0)
 			return (1);
+		printf("i: %d\n", i);
 	}
 	if (death_check(rules))
 		return (1);
@@ -269,7 +270,7 @@ int	init_continue(t_rules *rules)
 			ft_error("Mutex initialize error!");
 			return (1);
 		}
-		printf("i: %d Mutex initialized!\n", i); //sil
+		//printf("i: %d Mutex initialized!\n", i); //sil
 		i++;
 	}
 	rules->philo = malloc (sizeof(t_philo) * rules->philo_nof);
@@ -281,7 +282,7 @@ int	init_continue(t_rules *rules)
 	i = -1;
 	while (++i < rules->philo_nof)
 	{
-		rules->philo[i].philo_id = 0;
+		rules->philo[i].philo_id = i;
 		rules->philo[i].eat_counter = 0;
 		rules->philo[i].left_fork_id = i;
 		rules->philo[i].right_fork_id = (i + 1) % rules->philo_nof;
