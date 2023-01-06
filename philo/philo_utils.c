@@ -6,7 +6,7 @@
 /*   By: mtemel <mtemel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 14:10:56 by mtemel            #+#    #+#             */
-/*   Updated: 2023/01/06 14:14:02 by mtemel           ###   ########.fr       */
+/*   Updated: 2023/01/06 14:45:58 by mtemel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,11 @@ long long	get_the_time(void)
 /* print acording to rules */
 void	my_print(int philo_id, char *s, t_rules *rules)
 {
-	if(rules->is_dead == 0)
+	if (rules->is_dead == 0)
 	{
 		pthread_mutex_lock(&rules->writex);
-		printf("\033[0;97m%llu \033[0;96m%d %s\n", get_the_time() - rules->start_time, philo_id, s);
+		printf("\033[0;97m%llu \033[0;96m%d %s\n",
+			get_the_time() - rules->start_time, philo_id, s);
 		pthread_mutex_unlock(&rules->writex);
 	}
 }
@@ -42,13 +43,13 @@ void	my_print(int philo_id, char *s, t_rules *rules)
 /* pass the time acording to arguments */
 void	time_passer(int time_tocheck, t_rules *rules)
 {
-	long long start;
+	long long	start;
 
 	start = get_the_time();
 	while (rules->is_dead == 0)
 	{
 		if (get_the_time() - start >= time_tocheck)
-			break;
+			break ;
 		usleep(41);
 	}
 }
