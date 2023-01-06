@@ -6,7 +6,7 @@
 /*   By: mtemel <mtemel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 16:24:22 by mtemel            #+#    #+#             */
-/*   Updated: 2023/01/06 15:05:38 by mtemel           ###   ########.fr       */
+/*   Updated: 2023/01/06 16:37:00 by mtemel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ int			init_continue2(t_rules *rules);
 int			check_arg(char **argv, int argc);
 int			check_arg2(char **argv, int argc);
 
-int		start_to_thrive(t_rules *rules);
-void	*routine(void *void_philo);
-int		death_check(t_rules *rules);
-void	lets_eat(t_philo *philo);
+int			start_to_thrive(t_rules *rules);
+void		*routine(void *void_philo);
+int			death_check(t_rules *rules);
+void		lets_eat(t_philo *philo);
 
 #endif
