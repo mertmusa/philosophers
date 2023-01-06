@@ -14,7 +14,7 @@
 
 //int (deneme) = 0;
 
-//ssymbols: 💀 🍴 🍕 🌙💤 💭💭💭
+//symbols: 💀 🍴 🍕 🌙💤 💭💭💭
 
 /* warn when there is an error and write the description */
 void	ft_error(char *str)
@@ -59,8 +59,7 @@ void	my_print(int philo_id, char *s, t_rules *rules)
 	if(rules->is_dead == 0)
 	{
 		pthread_mutex_lock(&rules->writex);
-		printf("\033[0;97m%llu ", get_the_time() - rules->start_time);
-		printf("\033[0;96m%d %s\n", philo_id, s);
+		printf("\033[0;97m%llu \033[0;96m%d %s\n", get_the_time() - rules->start_time, philo_id, s);
 		pthread_mutex_unlock(&rules->writex);
 	}
 }
@@ -113,7 +112,7 @@ int	death_check(t_rules *rules)
 					pthread_mutex_destroy(&rules->writex);
 					while (++j < rules->philo_nof)
 						pthread_mutex_destroy(&rules->forkex[j]);
-					pthread_mutex_destroy(&rules->writex);
+					//pthread_mutex_destroy(&rules->writex);
 					return (1);
 				}
 			}
@@ -390,5 +389,6 @@ int	main(int argc, char **argv)
 	}
 	else
 		ft_error("Wrong Number Of Arguments!");
+	while (1);
 	return (0);
 }
