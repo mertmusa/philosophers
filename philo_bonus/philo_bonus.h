@@ -1,49 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   philo_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtemel <mtemel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 16:24:22 by mtemel            #+#    #+#             */
-/*   Updated: 2023/01/06 16:37:00 by mtemel           ###   ########.fr       */
+/*   Updated: 2023/01/07 10:47:19 by mtemel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#ifndef PHILO_BONUS_H
+# define PHILO_BONUS_H
 
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <pthread.h>
 # include <sys/time.h>
+# include <semaphore.h>
 
 struct	s_rules;
 typedef struct s_philo
 {
 	int				philo_id;
-	int				left_fork_id;
-	int				right_fork_id;
+	int				process_id;
 	int				eat_counter;
 	long long		last_eat;
-	pthread_t		thread_id;
 	struct s_rules	*mrules;
 }	t_philo;
 
 typedef struct s_rules
 {
-	int				philo_nof;
-	int				die_tto;
-	int				eat_tto;
-	int				sleep_tto;
-	int				eat_noftep;
-	int				is_dead;
-	int				all_eat;
-	pthread_mutex_t	*forkex;
-	pthread_mutex_t	writex;
-	t_philo			*philo;
-	long long		start_time;
+	int			philo_nof;
+	int			die_tto;
+	int			eat_tto;
+	int			sleep_tto;
+	int			eat_noftep;
+	long long	start_time;
+	sem_t		*forks;
+	sem_t		*writs;
+	int			is_dead;
+	int			all_eat;
+	pthread_t	yep;
+	pthread_t	check;
+	t_philo		*philo;
 }	t_rules;
 
 //philo_ulibft

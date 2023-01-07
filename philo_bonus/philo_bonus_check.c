@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_check.c                                      :+:      :+:    :+:   */
+/*   philo_bonus_check.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtemel <mtemel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 14:34:34 by mtemel            #+#    #+#             */
-/*   Updated: 2023/01/06 14:39:28 by mtemel           ###   ########.fr       */
+/*   Updated: 2023/01/07 10:19:11 by mtemel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 /* continue to check arguments if there is something wrong*/
 int	check_arg2(char **argv, int argc)

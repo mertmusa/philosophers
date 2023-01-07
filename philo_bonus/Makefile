@@ -6,14 +6,14 @@
 #    By: mtemel <mtemel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/28 16:21:03 by mtemel            #+#    #+#              #
-#    Updated: 2023/01/06 14:13:20 by mtemel           ###   ########.fr        #
+#    Updated: 2023/01/07 10:16:53 by mtemel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = philo
+NAME = philo_bonus
 CC = gcc
 FLAGS = -Wall -Wextra -Werror
-SRCS = philo*.c
+SRCS = philo_bonus*.c
 OBJ = $(SRCS:.c = .o)
 
 $(NAME): $(OBJ)

@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_utils.c                                      :+:      :+:    :+:   */
+/*   philo_bonus_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtemel <mtemel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 14:10:56 by mtemel            #+#    #+#             */
-/*   Updated: 2023/01/06 14:45:58 by mtemel           ###   ########.fr       */
+/*   Updated: 2023/01/07 11:12:30 by mtemel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 /* warn when there is an error and write the description */
 void	ft_error(char *str)
 {
 	write(2, "Error!\n", 7);
 	printf("%s\n", str);
+	exit(EXIT_FAILURE);
 }
 
 /* time from system */
@@ -53,3 +54,29 @@ void	time_passer(int time_tocheck, t_rules *rules)
 		usleep(41);
 	}
 }
+
+/*void	*waitp(void *data)
+{
+	int		idx;
+	int		res;
+	t_state	*all;
+
+	idx = -1;
+	all = (t_state *)data;
+	while (true)
+	{
+		waitpid(-1, &res, 0);
+		if (res != 0)
+		{
+			while (++idx < all->number_of)
+				kill(all->philo[idx].pid, SIGKILL);
+			break ;
+		}
+		usleep(100);
+	}
+	sem_close(all->forks);
+	sem_close(all->print);
+	sem_unlink("./forks");
+	sem_unlink("./print");
+	return (NULL);
+}*/

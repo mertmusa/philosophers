@@ -1,50 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_init.c                                       :+:      :+:    :+:   */
+/*   philo_bonus_init.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtemel <mtemel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 14:31:08 by mtemel            #+#    #+#             */
-/*   Updated: 2023/01/06 14:43:43 by mtemel           ###   ########.fr       */
+/*   Updated: 2023/01/07 10:50:34 by mtemel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 int	init_continue2(t_rules *rules)
 {
-	int (i) = -1;
-	while (++i < rules->philo_nof)
-	{
-		rules->philo[i].philo_id = i;
-		rules->philo[i].eat_counter = 0;
-		rules->philo[i].left_fork_id = i;
-		rules->philo[i].right_fork_id = (i + 1) % rules->philo_nof;
-		rules->philo[i].mrules = rules;
-		rules->philo[i].last_eat = get_the_time();
-	}
+	sem_unlink("./writs");
+	sem_unlink("./forks");
+	rules->forks = sem_open("./forks", O_CREAT, S_IRWXG, rules->philo_nof);
+	rules->writs = sem_open("./writs", O_CREAT, S_IRWXG, 1);
+	if (rules->forks == SEM_FAILED || rules->writs == SEM_FAILED)
+		ft_error("Semaphore(s) did not open properly!");
 	return (0);
 }
 
-/* continue to initialize */
+/* continue initializing with philos*/
 int	init_continue(t_rules *rules)
 {
 	int (i) = 0;
+	rules->philo = malloc(sizeof(t_philo) * rules->philo_nof);
+	if (!rules->philo)
+		ft_error("Philo structure allocation error!");
 	while (i < rules->philo_nof)
 	{
-		if (pthread_mutex_init(&rules->forkex[i], NULL) != 0)
-		{
-			ft_error("Mutex initialize error!");
-			return (1);
-		}
-		i++;
-	}
-	rules->philo = malloc (sizeof(t_philo) * rules->philo_nof);
-	if (!rules->philo)
-	{
-		ft_error("Philo structure allocation error!");
-		return (1);
+		rules->philo[i].philo_id = i;
+		rules->philo[i].eat_counter = 0;
+		rules->philo[i].last_eat = get_the_time();
+		rules->philo[i].mrules = rules;
 	}
 	return (init_continue2(rules));
 }
@@ -63,12 +54,5 @@ int	argtoparam_init(t_rules *rules, char **argv, int argc)
 	rules->is_dead = 0;
 	rules->all_eat = 0;
 	rules->start_time = get_the_time();
-	pthread_mutex_init(&rules->writex, NULL);
-	rules->forkex = malloc (sizeof(pthread_mutex_t) * rules->philo_nof);
-	if (!rules->forkex)
-	{
-		ft_error("Fork mutex allocation error!");
-		return (1);
-	}
 	return (init_continue(rules));
 }
