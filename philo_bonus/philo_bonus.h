@@ -6,7 +6,7 @@
 /*   By: mtemel <mtemel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 16:24:22 by mtemel            #+#    #+#             */
-/*   Updated: 2023/01/07 10:47:19 by mtemel           ###   ########.fr       */
+/*   Updated: 2023/01/07 17:17:33 by mtemel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <signal.h>
 # include <pthread.h>
 # include <sys/time.h>
 # include <semaphore.h>
@@ -47,28 +48,34 @@ typedef struct s_rules
 	t_philo		*philo;
 }	t_rules;
 
-//philo_ulibft
+//philo_bonus_ulibft
 int			ft_atoi(const char *str);
 int			ft_isdigit(int c);
 
-//philo_utils
+//philo_bonus_utils
 void		ft_error(char *str);
 long long	get_the_time(void);
 void		my_print(int philo_id, char *s, t_rules *rules);
 void		time_passer(int time_tocheck, t_rules *rules);
 
-//philo_init
+//philo_bonus_init
 int			argtoparam_init(t_rules *rules, char **argv, int argc);
 int			init_continue(t_rules *rules);
 int			init_continue2(t_rules *rules);
 
-//philo_check
+//philo_bonus_check
 int			check_arg(char **argv, int argc);
 int			check_arg2(char **argv, int argc);
 
-int			start_to_thrive(t_rules *rules);
-void		*routine(void *void_philo);
-int			death_check(t_rules *rules);
-void		lets_eat(t_philo *philo);
+//philo_bonus_loop
+void		philo_eat(t_philo *philo);
+void		philo_sleep(t_philo *philo);
+void		philo_think(t_philo *philo);
+
+//💀 🍴 🍕 🌙💤 💭💭💭
+int			start_to_starve(t_rules *rules);
+void		*waitp(void *data);
+void		spawn(t_philo *philo);
+void		*death_check(void *void_philo);
 
 #endif
